@@ -1,37 +1,37 @@
 # Recom3 Ghost
 
-HUD autónomo para grabar una bajada y repetirla contra una referencia en Recon Snow2. Guarda una referencia en el almacenamiento privado de la app. Reutiliza las fuentes y el cargador de fuentes de `reconUI`. El tema de pantalla completa y el manejo del mando siguen el ejemplo de Snow2Liftie por eventos DPAD.
+An offline ski ghost app for Recon Snow2. Record a downhill run, then ski the same route again to see how far ahead or behind you are on the HUD. The app stores one reference run on the device. It uses fonts and a font loader from `reconUI` and follows Snow2Liftie's example for the full-screen theme and D-pad controls.
 
-## Vista del HUD
+## HUD preview
 
-<img src="docs/recom3-ghost-hud.png" width="428" alt="HUD de Recom3 Ghost con tres segundos de ventaja, velocidad, distancia y trazado de la bajada">
+<img src="docs/recom3-ghost-hud.png" width="428" alt="Recom3 Ghost HUD showing a three-second lead, speed, distance, and the run trace">
 
-*Recreación de la pantalla durante una bajada, con datos de ejemplo.*
+*Preview of the current HUD during a run, with sample data.*
 
-## Uso
+## How to use
 
-1. Abre **Recom3 Ghost** en el HUD y espera a **GPS LISTO**.
-2. En la salida, pulsa **OK** para grabar. La grabación empieza con la siguiente posición válida. Pulsa **OK** al terminar la bajada para guardar la referencia.
-3. Vuelve a la misma salida y pulsa **OK** para comparar. El tiempo negativo indica que vas por delante. Pulsa **OK** cerca de la meta para cerrar la comparación.
-4. Desde la pantalla inicial, pulsa **derecha** y luego **OK** para grabar otra referencia. **Atrás** o **izquierda** cancelan la grabación. La referencia anterior se conserva hasta que se guarda una nueva.
+1. Open **Recom3 Ghost** on the HUD and wait for **GPS LISTO** (GPS ready).
+2. At the start of the run, press **OK**. Recording begins with the next valid GPS fix. Press **OK** at the end of the run to save it as your reference.
+3. Return to the same starting point and press **OK** to race your ghost. A negative time means you are ahead. Press **OK** near the finish to end the comparison.
+4. To replace the reference, press **Right** on the home screen, then **OK** to record. Press **Back** or **Left** to cancel. The previous reference stays saved until you finish and save the new run.
 
-El HUD actualiza la diferencia cuando puede asociar la posición a un tramo cercano del recorrido guardado. La diferencia se muestra en segundos enteros. Las grabaciones se hacen con el HUD en primer plano y se cancelan al salir de la pantalla. Una grabación con un hueco GPS largo no se puede guardar como referencia.
+The HUD updates the time difference in whole seconds when it can match your position to a nearby segment of the saved route. Keep the app open during the run. Leaving the screen cancels the recording, and a long GPS gap prevents the run from being saved as a reference.
 
-## Compilación e instalación
+## Build and install
 
-Usa JDK 8, Android SDK Platform 27 y Build Tools 27.0.3. Configura `ANDROID_HOME` o crea un `local.properties` con `sdk.dir`. La APK usa API mínima y objetivo 16 para Snow2. El proyecto usa Gradle 4.1 y Android Gradle Plugin 3.0.1.
+Use JDK 8, Android SDK Platform 27, and Build Tools 27.0.3. Set `ANDROID_HOME` or create a `local.properties` file with `sdk.dir`. The APK uses API 16 as both its minimum and target SDK for Snow2. The project uses Gradle 4.1 and Android Gradle Plugin 3.0.1.
 
 ```powershell
 .\gradlew.bat :app:assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
-En Windows, si el Gradle antiguo no puede resolver sus dependencias, ejecuta `.\build-apk.ps1` con `JAVA_HOME` y `ANDROID_HOME` configurados. Genera y verifica la APK en la misma ruta. Conserva el mismo keystore de depuración para poder actualizarla con `adb install -r`.
+On Windows, if Gradle cannot resolve its dependencies, set `JAVA_HOME` and `ANDROID_HOME`, then run `.\build-apk.ps1`. The script builds and verifies the APK at the same path. Keep the same debug keystore so you can install updates with `adb install -r`.
 
-Para validar la comparación en el dispositivo, graba dos pasadas por el mismo recorrido y comprueba el GPS, el mando y la estabilidad de la diferencia, en especial en los giros y cuando se pierde y recupera señal.
+To check the comparison on the device, record two runs on the same route. Check GPS reception, the remote buttons, and how steady the time difference is through turns and after the GPS signal drops and returns.
 
-## Licencias
+## Licenses
 
-- El código propio de Recom3 Ghost se distribuye bajo la [licencia MIT](LICENSE).
-- El código reutilizado de Recon Instruments se distribuye bajo la [Artistic License 2.0](reconUI/LICENSE). El [README del módulo](reconUI/README.md) describe la adaptación.
-- Las fuentes Open Sans incluidas se distribuyen bajo la [Apache License 2.0](reconUI/LICENSE-OpenSans.txt).
+- The original Recom3 Ghost code is released under the [MIT License](LICENSE).
+- The reused Recon Instruments code is covered by the [Artistic License 2.0](reconUI/LICENSE). The [module README](reconUI/README.md) describes the changes.
+- The bundled Open Sans fonts are covered by the [Apache License 2.0](reconUI/LICENSE-OpenSans.txt).
