@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ghost_background">#081D27</color>
+    <string name="app_name">Recom3 Ghost</string>
+    <style name="GhostTheme" parent="android:Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/ghost_background</item>
+        <item name="android:colorBackground">@color/ghost_background</item>
+    </style>
+</resources>
